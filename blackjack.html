@@ -26,7 +26,7 @@
     <h1>Live Python Output Window</h1>
     <button py-click="run_script">Start Script</button>
     <div id="term"></div>
-    <py-script><![CDATA[
+    <py-script>
 import random
 import matplotlib.pyplot as plt
 import time
@@ -62,10 +62,10 @@ BettingClosed=0
 
 def BettingRules():
     global AIMoney, RiskFactor, AmountBet, HandsPlayed, HandNumber, TurnOver, BettingClosed, Win
-    if 10<AIMoney<EndingMoney:
+    if 10 &lt; AIMoney &lt; EndingMoney:
         if Win==1 or HandNumber==0:
             AmountBet=AIMoney/(2**RiskFactor)
-        elif Win==0 and AIMoney>=AmountBet*2:
+        elif Win==0 and AIMoney &gt;= AmountBet*2:
             AmountBet=AmountBet*2
         elif Win==0:
             AmountBet=AIMoney
@@ -93,9 +93,9 @@ def Split():
     SplitCheck=AIHand[1]
     AIHand[1]=random.randint(1, 13)
     term.innerHTML += f"AI splits and now has {AIHand}<br>"
-    if AIHand[-1]>10:
+    if AIHand[-1] &gt; 10:
         JQKAIHand()
-    if AIHand[0]==1 and AIHand[1]>9:
+    if AIHand[0]==1 and AIHand[1] &gt; 9:
         Blackjack()
     FirstHandCheck=0
 
@@ -103,7 +103,7 @@ def Split():
 def Hit():
     global AIHand, AIHandSum, DoubleDownCheck, AINumber
     AIHand.append(random.randint(1, 13))
-    if AIHand[-1]>10:
+    if AIHand[-1] &gt; 10:
         JQKAIHand()
     AIHandSum=AIHandSum+AIHand[-1]
     term.innerHTML += f"AI hits and now has {AIHand}<br>"
@@ -111,7 +111,7 @@ def Hit():
 
 def DoubleDown():
     global AmountBet, AIHand, TurnOver, AIMoney, FirstHandCheck, DoubleDownCheck, AINumber
-    if AIMoney>AmountBet:
+    if AIMoney &gt; AmountBet:
         DoubleDownCheck=1
         AIMoney=AIMoney-AmountBet
         AmountBet=AmountBet*2
@@ -145,12 +145,12 @@ def Stand():
 def DealerHit():
     global DealerHandF, DealerHandSum, AINumber
     DealerHandF.append(random.randint(1, 13))
-    if DealerHandF[-1]>10:
+    if DealerHandF[-1] &gt; 10:
         JQKDealerHand()
     DealerHandSum=DealerHandSum+DealerHandF[-1]
     term.innerHTML += f"Dealer has {DealerHandF}<br>"
 
-while AINumber<TotalAINumber:
+while AINumber &lt; TotalAINumber:
     if AINumber%1000==0 and AINumber!=0:
         term.innerHTML += f"AIs played: {AINumber}<br>"
     AIMoney=StartingMoney
@@ -159,7 +159,7 @@ while AINumber<TotalAINumber:
     SplitCheck=0
     SplitCheck1=0
     term.innerHTML += f"AI begins with ${AIMoney}<br>"
-    while HandNumber<HandsPlayed:
+    while HandNumber &lt; HandsPlayed:
         TurnOver=0
         FirstHandCheck=0
         Bust=0
@@ -169,24 +169,24 @@ while AINumber<TotalAINumber:
         BettingRules()
         Win=0
         AIHand=[random.randint(1, 13)]
-        if AIHand[0]>10:
+        if AIHand[0] &gt; 10:
             AIHand[0]=10
         if SplitCheck==0:
             DealerTurnOver=0
             DealerHandF=[0]
             DealerHandSum=0
             DealerHand=[random.randint(1, 13)]
-            if DealerHand[0]>10:
+            if DealerHand[0] &gt; 10:
                 DealerHand[0]=10
             DealerHand.append(random.randint(1, 13))
-            if DealerHand[1]>10:
+            if DealerHand[1] &gt; 10:
                 DealerHand[1]=10
         if AINumber!=TotalAINumber-1:
             term.innerHTML += f"Dealer's showing card: {DealerHand[1]}<br>"
         AIHand.append(random.randint(1, 13))
-        if AIHand[1]>10:
+        if AIHand[1] &gt; 10:
             AIHand[1]=10
-        if SplitCheck>0:
+        if SplitCheck &gt; 0:
             term.innerHTML += f"AI previously split with {SplitCheck}<br>"
             AIHand[0]=SplitCheck
             SplitCheck=0
@@ -196,7 +196,7 @@ while AINumber<TotalAINumber:
         DealerHand.sort()
         if DealerHand[0]==1:
             if DealerHand[1]==10:
-                if AIHand[0]==1 and AIHand[1]>9:
+                if AIHand[0]==1 and AIHand[1] &gt; 9:
                     Win=2
                     AIMoney=AIMoney+AmountBet
                     term.innerHTML += f"AI and Dealer both have BlackJack<br>"
@@ -207,7 +207,7 @@ while AINumber<TotalAINumber:
                 Bust=1
                 FirstHandCheck=1
                 TurnOver=1
-        if AIHand[0]==1 and AIHand[1]>9 and Bust==0:
+        if AIHand[0]==1 and AIHand[1] &gt; 9 and Bust==0:
             Blackjack()
         if AINumber!=TotalAINumber-1:
             term.innerHTML += f"AI's original cards: {AIHand}<br>"
@@ -221,28 +221,28 @@ while AINumber<TotalAINumber:
                     if AIHand[0]==1 or AIHand[0]==8:
                         Split()
                     elif AIHand[0]==2 or AIHand [0]==3:
-                        if 3<DealerHand[1]<8:
+                        if 3 &lt; DealerHand[1] &lt; 8:
                             Split()
                         else:
                             Hit()
                     elif AIHand[0]==4:
                         Hit()
                     elif AIHand[0]==5:
-                        if DealerHand[1]<10 and DealerHand[1]!=1:
+                        if DealerHand[1] &lt; 10 and DealerHand[1]!=1:
                             DoubleDown()
                         else:
                             Hit()
-                        if DealerHand[1]<7 and DealerHand[1]!=1:
+                        if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
                             Split()
                         else:
                             Hit()
                     elif AIHand[0]==7:
-                        if DealerHand[1]<8 and DealerHand[1]!=1:
+                        if DealerHand[1] &lt; 8 and DealerHand[1]!=1:
                             Split()
                         else:
                             Hit()
                     elif AIHand[0]==9:
-                        if DealerHand[1]<7 and DealerHand[1]!=1:
+                        if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
                             Split()
                         elif DealerHand[1]==8 or DealerHand[1]==9:
                             Split()
@@ -252,15 +252,15 @@ while AINumber<TotalAINumber:
                         Stand()
                 elif AIHand[0]==1 and FirstHandCheck==0:
                     FirstHandCheck=1
-                    if AIHand[1]<7:
-                        if 3<DealerHand[1]<7:
+                    if AIHand[1] &lt; 7:
+                        if 3 &lt; DealerHand[1] &lt; 7:
                             DoubleDown()
                         else:
                             Hit()
                     elif AIHand[1]==7:
                         if DealerHand[1]==2 or DealerHand[1]==7 or DealerHand[1]==8:
                             Stand()
-                        elif 2<DealerHand[1]<7:
+                        elif 2 &lt; DealerHand[1] &lt; 7:
                             DoubleDown()
                         else:
                             Hit()
@@ -268,27 +268,27 @@ while AINumber<TotalAINumber:
                         Stand()    
                 elif FirstHandCheck==0:
                     FirstHandCheck=1
-                    if AIHand[0]+AIHand[1]<9:
+                    if AIHand[0]+AIHand[1] &lt; 9:
                         Hit()
                     elif AIHand[0]+AIHand[1]==9:
-                        if 2<DealerHand[1]<7:
+                        if 2 &lt; DealerHand[1] &lt; 7:
                             DoubleDown()
                         else:
                             Hit()
                     elif AIHand[0]+AIHand[1]==10:
-                        if DealerHand[1]<10 and DealerHand[1]!=1:
+                        if DealerHand[1] &lt; 10 and DealerHand[1]!=1:
                             DoubleDown()
                         else:
                             Hit()
                     elif AIHand[0]+AIHand[1]==11:
                         DoubleDown()
                     elif AIHand[0]+AIHand[1]==12:
-                        if 3<DealerHand[1]<7:
+                        if 3 &lt; DealerHand[1] &lt; 7:
                             Stand()
                         else:
                             Hit()
-                    elif AIHand[0]+AIHand[1]<17:
-                        if DealerHand[1]<7 and DealerHand[1]!=1:
+                    elif AIHand[0]+AIHand[1] &lt; 17:
+                        if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
                             Stand()
                         else:
                             Hit()
@@ -297,7 +297,7 @@ while AINumber<TotalAINumber:
             while TurnOver==0:
                 AIHand.sort()
                 if AIHand[0]==1:
-                    if AIHandSum<8:
+                    if AIHandSum &lt; 8:
                         Hit()
                     elif AIHandSum==8:
                         if DealerHand[1]==2 or DealerHand[1]==7 or DealerHand[1]==8:
@@ -307,21 +307,21 @@ while AINumber<TotalAINumber:
                     else:
                         Stand()    
                 else:
-                    if AIHandSum<12:
+                    if AIHandSum &lt; 12:
                         Hit()
                     elif AIHandSum==12:
-                        if 3<DealerHand[1]<7:
+                        if 3 &lt; DealerHand[1] &lt; 7:
                             Stand()
                         else:
                             Hit()
-                    elif AIHandSum<17:
-                        if DealerHand[1]<7 and DealerHand[1]!=1:
+                    elif AIHandSum &lt; 17:
+                        if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
                             Stand()
                         else:
                             Hit()
-                    elif AIHandSum<22:
+                    elif AIHandSum &lt; 22:
                         Stand()
-                if AIHandSum>21:
+                if AIHandSum &gt; 21:
                     term.innerHTML += f"AI Busted with {AIHandSum}<br>"
                     term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
                     Bust=1
@@ -335,14 +335,14 @@ while AINumber<TotalAINumber:
                 while DealerTurnOver==0:
                     DealerHandF.sort()
                     if DealerHandF[0]==1:
-                        if DealerHandSum+10>17 and DealerHandSum+10<22:
+                        if DealerHandSum+10 &gt; 17 and DealerHandSum+10 &lt; 22:
                             DealerHandSum=DealerHandSum+10
                             DealerTurnOver=1
-                        elif DealerHandSum<17:
+                        elif DealerHandSum &lt; 17:
                             DealerHit()
                         else:
                             DealerTurnOver=1
-                    elif DealerHandSum<17:
+                    elif DealerHandSum &lt; 17:
                         DealerHit()
                     else:
                         DealerTurnOver=1
@@ -352,13 +352,13 @@ while AINumber<TotalAINumber:
             term.innerHTML += f"Final AI hand: {AIHand}<br>"
             term.innerHTML += f"Final Dealer hand: {DealerHandF}<br>"
             if AIHand[0]==1:
-                if AIHandSum+10<22:
+                if AIHandSum+10 &lt; 22:
                     AIHandSum=AIHandSum+10
-            if DealerHandSum>21:
+            if DealerHandSum &gt; 21:
                 AIMoney=AIMoney+2*AmountBet
                 Win=1
                 term.innerHTML += f"Win, AI now has ${round(AIMoney, 2)}<br>"
-            elif AIHandSum>DealerHandSum:
+            elif AIHandSum &gt; DealerHandSum:
                 AIMoney=AIMoney+2*AmountBet
                 Win=1
                 term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
@@ -370,7 +370,7 @@ while AINumber<TotalAINumber:
                 term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
         term.innerHTML += "<br>" + "<br>"
         SplitCheck1=0
-        if SplitCheck>0:
+        if SplitCheck &gt; 0:
             SplitCheck1=1
         HandNumber=HandNumber+1
     if AINumber!=TotalAINumber-1:
@@ -382,7 +382,7 @@ TotalAIMoney.sort()
 term.innerHTML += f"Total AIs trained: {TotalAINumber}<br>"
 for z in range(0, len(TotalAIMoney), 1):
     AverageAIMoney=AverageAIMoney+TotalAIMoney[z]
-    if TotalAIMoney[z]>1000 and Above1000Checker==0:
+    if TotalAIMoney[z] &gt; 1000 and Above1000Checker==0:
         term.innerHTML += f"Percentage of AIs Above {EndingMoney}: {100-(100*(z-1)/TotalAINumber)}<br>"
         Above1000Checker=1
 AverageAIMoney=AverageAIMoney/TotalAINumber
@@ -394,6 +394,6 @@ plt.title("Amount of Money Each AI Ends With")
 plt.xlabel("Final Amount of Money.")
 plt.ylabel("Frequency.")
 plt.show()
-    ]]></py-script>
+    </py-script>
   </body>
 </html>
