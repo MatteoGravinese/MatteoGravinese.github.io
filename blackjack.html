@@ -32,7 +32,7 @@
       { "packages": ["matplotlib"] }
     </py-config>
     <py-script>
-def run_simulation(*args, **kwargs):
+async def run_simulation(*args, **kwargs):
   from js import document, setTimeout
   def scroll_to_bottom():
     term = document.querySelector("#output")
