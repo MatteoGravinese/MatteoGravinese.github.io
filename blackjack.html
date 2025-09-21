@@ -65,7 +65,7 @@ def run_simulation(*args, **kwargs):
   
   
   def BettingRules():
-      global AIMoney, RiskFactor, AmountBet, HandsPlayed, HandNumber, TurnOver, BettingClosed, Win
+      nonlocal AIMoney, RiskFactor, AmountBet, HandsPlayed, HandNumber, TurnOver, BettingClosed, Win
       if 10 &lt; AIMoney &lt; EndingMoney:
           if Win==1 or HandNumber==0:
               AmountBet=AIMoney/(2**RiskFactor)
@@ -83,17 +83,17 @@ def run_simulation(*args, **kwargs):
   
   
   def JQKAIHand():
-      global AIHand
+      nonlocal AIHand
       AIHand[-1]=10
   
   
   def JQKDealerHand():
-      global DealerHandF
+      nonlocal DealerHandF
       DealerHandF[-1]=10
   
   
   def Split():
-      global SplitCheck, AmountBet, AIHand, DealerHand, FirstHandCheck, AINumber
+      nonlocal SplitCheck, AmountBet, AIHand, DealerHand, FirstHandCheck, AINumber
       SplitCheck=AIHand[1]
       AIHand[1]=random.randint(1, 13)
       term.innerHTML += f"AI splits and now has {AIHand}<br>"
@@ -105,7 +105,7 @@ def run_simulation(*args, **kwargs):
   
   
   def Hit():
-      global AIHand, AIHandSum, DoubleDownCheck, AINumber
+      nonlocal AIHand, AIHandSum, DoubleDownCheck, AINumber
       AIHand.append(random.randint(1, 13))
       if AIHand[-1] &gt; 10:
           JQKAIHand()
@@ -114,7 +114,7 @@ def run_simulation(*args, **kwargs):
      
   
   def DoubleDown():
-      global AmountBet, AIHand, TurnOver, AIMoney, FirstHandCheck, DoubleDownCheck, AINumber
+      nonlocal AmountBet, AIHand, TurnOver, AIMoney, FirstHandCheck, DoubleDownCheck, AINumber
       if AIMoney &gt; AmountBet:
           DoubleDownCheck=1
           AIMoney=AIMoney-AmountBet
@@ -129,7 +129,7 @@ def run_simulation(*args, **kwargs):
   
   
   def Blackjack():
-      global AmountBet, AIMoney, TurnOver, BettingClosed, AINumber, AIHand, Bust, Win, FirstHandCheck
+      nonlocal AmountBet, AIMoney, TurnOver, BettingClosed, AINumber, AIHand, Bust, Win, FirstHandCheck
       AIMoney=AIMoney+2.5*AmountBet
       TurnOver=1
       Bust=1
@@ -141,13 +141,13 @@ def run_simulation(*args, **kwargs):
   
   
   def Stand():
-      global TurnOver, AINumber
+      nonlocal TurnOver, AINumber
       TurnOver=1
       term.innerHTML += f"AI stands with {AIHand}<br>"
   
   
   def DealerHit():
-      global DealerHandF, DealerHandSum, AINumber
+      nonlocal DealerHandF, DealerHandSum, AINumber
       DealerHandF.append(random.randint(1, 13))
       if DealerHandF[-1] &gt; 10:
           JQKDealerHand()
