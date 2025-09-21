@@ -5,6 +5,12 @@
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.5.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2024.5.1/core.js"></script>
     <style>
+      #main-container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        margin-top: 20px;
+      }
       #output {
         display: block;
         background-color: #1e1e1e;
@@ -18,6 +24,13 @@
         white-space: pre-wrap;
         margin-top: 15px;
       }
+      #plot {
+        width: 600px;
+        height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fff;
+      }
     </style>
   </head>
   <body>
@@ -27,7 +40,10 @@
     <label>Hands Played:</label>
     <input type="number" id="hands-played" value="10"><br><br>
     <button py-click="run_simulation">Start Simulation</button>
-    <div id="output"></div>
+    <div id="main-container">
+      <div id="output"></div>
+      <div id="plot"></div>
+    </div>
     <py-config>
       { "packages": ["matplotlib"] }
     </py-config>
