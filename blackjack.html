@@ -27,15 +27,17 @@
     <button py-click="run_script">Start Script</button>
     <div id="term"></div>
     <py-script>
+    import asyncio
     from js import document
-    from time import sleep
-    def run_script(event=None):
+    async def run_script(event=None):
       term = document.getElementById("term")
-      term.innerHTML = ""
+      term.innerHTML = ""   # clear old content
       for i in range(1, 6):
         term.innerHTML += f"Step {i} running...<br>"
-        sleep(1)
+        term.scrollTop = term.scrollHeight
+        await asyncio.sleep(1)
       term.innerHTML += "✅ Done!<br>"
+      term.scrollTop = term.scrollHeight
     </py-script>
   </body>
 </html>
