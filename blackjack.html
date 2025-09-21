@@ -69,12 +69,12 @@ def BettingRules():
             AmountBet=AmountBet*2
         elif Win==0:
             AmountBet=AIMoney
-        term.innerHTML += "Amount bet: $" + round(AmountBet, 2) + "<br>"
+        term.innerHTML += "Amount bet: $" + str(round(AmountBet, 2)) + "<br>"
     else:
         AmountBet=0
         HandNumber=HandsPlayed
         BettingClosed=1
-        term.innerHTML += "AI ends with $" + round(AIMoney, 2) + "<br>"
+        term.innerHTML += "AI ends with $" + str(round(AIMoney, 2)) + "<br>"
     AIMoney=AIMoney-AmountBet
 
 
@@ -132,7 +132,7 @@ def Blackjack():
     Win=1
     FirstHandCheck=1
     term.innerHTML += "BlackJack!" + AIHand+ "<br>"
-    term.innerHTML +="AI won and now has $" + round(AIMoney, 2) + "<br>"
+    term.innerHTML +="AI won and now has $" + str(round(AIMoney, 2)) + "<br>"
     BettingClosed=1
 
 
@@ -201,11 +201,11 @@ while AINumber<TotalAINumber:
                     Win=2
                     AIMoney=AIMoney+AmountBet
                     term.innerHTML += "AI and Dealer both have BlackJack" + "<br>"
-                    term.innerHTML += "Tie, AI now has $" + round(AIMoney, 2) + "<br>"
+                    term.innerHTML += "Tie, AI now has $" + str(round(AIMoney, 2)) + "<br>"
 
                 else:
                     term.innerHTML += "Dealer has BlackJack"+ "<br>"
-                    term.innerHTML += "Loss, AI now has $" + round(AIMoney, 2) + "<br>"
+                    term.innerHTML += "Loss, AI now has $" + str(round(AIMoney, 2)) + "<br>"
                 Bust=1
                 FirstHandCheck=1
                 TurnOver=1
@@ -325,7 +325,7 @@ while AINumber<TotalAINumber:
                         Stand()
                 if AIHandSum>21:
                     term.innerHTML += "AI Busted with" + AIHandSum + "<br>"
-                    term.innerHTML += "Loss, AI now has $" + round(AIMoney, 2) + "<br>"
+                    term.innerHTML += "Loss, AI now has $" + str(round(AIMoney, 2)) + "<br>"
                     Bust=1
                     TurnOver=1
         if Bust==0 and BettingClosed==0:
@@ -359,17 +359,17 @@ while AINumber<TotalAINumber:
             if DealerHandSum>21:
                 AIMoney=AIMoney+2*AmountBet
                 Win=1
-                term.innerHTML += "Win, AI now has $" + round(AIMoney, 2 )+ "<br>"
+                term.innerHTML += "Win, AI now has $" + str(round(AIMoney, 2))+ "<br>"
             elif AIHandSum>DealerHandSum:
                 AIMoney=AIMoney+2*AmountBet
                 Win=1
-                term.innerHTML += "Win, AI now has $" + round(AIMoney, 2) + "<br>"
+                term.innerHTML += "Win, AI now has $" + str(round(AIMoney, 2)) + "<br>"
             elif AIHandSum==DealerHandSum:
                 Win=2
                 AIMoney=AIMoney+AmountBet
-                term.innerHTML += "Tie, AI now has $" + round(AIMoney, 2) + "<br>"
+                term.innerHTML += "Tie, AI now has $" + str(round(AIMoney, 2)) + "<br>"
             else:
-                term.innerHTML += "Loss, AI now has $" + round(AIMoney, 2) + "<br>"
+                term.innerHTML += "Loss, AI now has $" + str(round(AIMoney, 2)) + "<br>"
         term.innerHTML += "<br>" + "<br>"
         SplitCheck1=0
         if SplitCheck>0:
