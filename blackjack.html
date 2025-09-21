@@ -22,6 +22,10 @@
   </head>
   <body>
     <h1>AI Blackjack Simulation</h1>
+    <label>Total AI Number:</label>
+    <input type="number" id="total-ai" value="10"><br><br>
+    <label>Hands Played:</label>
+    <input type="number" id="hands-played" value="10"><br><br>
     <button py-click="run_simulation">Start Simulation</button>
     <div id="output"></div>
     <py-config>
@@ -30,6 +34,8 @@
     <py-script>
 def run_simulation(*args, **kwargs):
   from js import document
+  TotalAINumber = int(document.querySelector("#total-ai").value)
+  HandsPlayed = int(document.querySelector("#hands-played").value)
   term = document.querySelector("#output")
   term.innerHTML = ""
   import matplotlib.pyplot as plt
