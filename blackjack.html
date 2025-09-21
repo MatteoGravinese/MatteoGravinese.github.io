@@ -26,7 +26,7 @@
     <h1>Live Python Output Window</h1>
     <button py-click="run_script">Start Script</button>
     <div id="term"></div>
-    <py-script>
+    <py-script><![CDATA[
 import random
 import matplotlib.pyplot as plt
 import time
@@ -394,6 +394,6 @@ plt.title("Amount of Money Each AI Ends With")
 plt.xlabel("Final Amount of Money.")
 plt.ylabel("Frequency.")
 plt.show()
-    </py-script>
+    ]]></py-script>
   </body>
 </html>
