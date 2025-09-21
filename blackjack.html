@@ -72,7 +72,7 @@ async def run_simulation(*args, **kwargs):
 
 
 
-  def BettingRules():
+  async def BettingRules():
       nonlocal AIMoney, RiskFactor, AmountBet, HandsPlayed, HandNumber, TurnOver, BettingClosed, Win
       if 10 &lt; AIMoney &lt; EndingMoney:
           if Win==1 or HandNumber==0:
@@ -94,17 +94,17 @@ async def run_simulation(*args, **kwargs):
       AIMoney=AIMoney-AmountBet
 
 
-  def JQKAIHand():
+  async def JQKAIHand():
       nonlocal AIHand
       AIHand[-1]=10
 
 
-  def JQKDealerHand():
+  async def JQKDealerHand():
       nonlocal DealerHandF
       DealerHandF[-1]=10
 
 
-  def Split():
+  async def Split():
       nonlocal SplitCheck, AmountBet, AIHand, DealerHand, FirstHandCheck, AINumber
       SplitCheck=AIHand[1]
       AIHand[1]=random.randint(1, 13)
@@ -117,7 +117,7 @@ async def run_simulation(*args, **kwargs):
       FirstHandCheck=0
 
 
-  def Hit():
+  async def Hit():
       nonlocal AIHand, AIHandSum, DoubleDownCheck, AINumber
       AIHand.append(random.randint(1, 13))
       if AIHand[-1] &gt; 10:
@@ -127,7 +127,7 @@ async def run_simulation(*args, **kwargs):
       term.scrollTop = term.scrollHeight
 
 
-  def DoubleDown():
+  async def DoubleDown():
       nonlocal AmountBet, AIHand, TurnOver, AIMoney, FirstHandCheck, DoubleDownCheck, AINumber
       if AIMoney &gt; AmountBet:
           DoubleDownCheck=1
@@ -143,7 +143,7 @@ async def run_simulation(*args, **kwargs):
       FirstHandCheck=1
 
 
-  def Blackjack():
+  async def Blackjack():
       nonlocal AmountBet, AIMoney, TurnOver, BettingClosed, AINumber, AIHand, Bust, Win, FirstHandCheck
       AIMoney=AIMoney+2.5*AmountBet
       TurnOver=1
@@ -157,14 +157,14 @@ async def run_simulation(*args, **kwargs):
       BettingClosed=1
 
 
-  def Stand():
+  async def Stand():
       nonlocal TurnOver, AINumber
       TurnOver=1
       term.innerHTML += f"AI stands with {AIHand}<br>"
       term.scrollTop = term.scrollHeight
 
 
-  def DealerHit():
+  async def DealerHit():
       nonlocal DealerHandF, DealerHandSum, AINumber
       DealerHandF.append(random.randint(1, 13))
       if DealerHandF[-1] &gt; 10:
@@ -191,7 +191,7 @@ async def run_simulation(*args, **kwargs):
           BettingClosed=0
           AIHandSum=0
           DealerFirstCard=[]
-          BettingRules()
+          await BettingRules()
           Win=0
           AIHand=[random.randint(1, 13)]
           if AIHand[0] &gt; 10:
