@@ -43,6 +43,7 @@ def run_simulation(*args, **kwargs):
   term.innerHTML = ""
   import matplotlib.pyplot as plt
   import random
+  import asyncio
   TotalAIMoney=[]
   RiskFactor=4
   StartingMoney=1000
@@ -83,6 +84,7 @@ def run_simulation(*args, **kwargs):
           term.innerHTML += f"Amount bet: ${round(AmountBet, 2)}<br>"
           setTimeout(scroll_to_bottom, 0)
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
       else:
           AmountBet=0
           HandNumber=HandsPlayed
