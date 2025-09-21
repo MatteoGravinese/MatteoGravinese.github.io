@@ -69,12 +69,12 @@ def BettingRules():
             AmountBet=AmountBet*2
         elif Win==0:
             AmountBet=AIMoney
-        term.innerHTML += "Amount bet: $" + str(round(AmountBet, 2)) + "<br>"
+        term.innerHTML += f"Amount bet: ${round(AmountBet, 2)}<br>"
     else:
         AmountBet=0
         HandNumber=HandsPlayed
         BettingClosed=1
-        term.innerHTML += "AI ends with $" + str(round(AIMoney, 2)) + "<br>"
+        term.innerHTML += f"AI ends with ${round(AIMoney, 2)}<br>"
     AIMoney=AIMoney-AmountBet
 
 
@@ -92,7 +92,7 @@ def Split():
     global SplitCheck, AmountBet, AIHand, DealerHand, FirstHandCheck, AINumber
     SplitCheck=AIHand[1]
     AIHand[1]=random.randint(1, 13)
-    term.innerHTML += "AI splits and now has" + AIHand + "<br>"
+    term.innerHTML += f"AI splits and now has {AIHand}<br>"
     if AIHand[-1]>10:
         JQKAIHand()
     if AIHand[0]==1 and AIHand[1]>9:
@@ -106,7 +106,7 @@ def Hit():
     if AIHand[-1]>10:
         JQKAIHand()
     AIHandSum=AIHandSum+AIHand[-1]
-    term.innerHTML += "AI hits and now has" + AIHand + "<br>"
+    term.innerHTML += f"AI hits and now has {AIHand}<br>"
    
 
 def DoubleDown():
@@ -116,7 +116,7 @@ def DoubleDown():
         AIMoney=AIMoney-AmountBet
         AmountBet=AmountBet*2
         Hit()
-        term.innerHTML += "AI doubles down and now has" + AIHand + "<br>"
+        term.innerHTML += f"AI doubles down and now has {AIHand}<br>"
         DoubleDownCheck=0
         TurnOver=1
     else:
@@ -131,15 +131,15 @@ def Blackjack():
     Bust=1
     Win=1
     FirstHandCheck=1
-    term.innerHTML += "BlackJack!" + AIHand+ "<br>"
-    term.innerHTML +="AI won and now has $" + str(round(AIMoney, 2)) + "<br>"
+    term.innerHTML += f"BlackJack! {AIHand}<br>"
+    term.innerHTML += f"AI won and now has ${round(AIMoney, 2)}<br>"
     BettingClosed=1
 
 
 def Stand():
     global TurnOver, AINumber
     TurnOver=1
-    term.innerHTML += "AI stands with" + AIHand + "<br>"
+    term.innerHTML += f"AI stands with {AIHand}<br>"
 
 
 def DealerHit():
@@ -148,18 +148,17 @@ def DealerHit():
     if DealerHandF[-1]>10:
         JQKDealerHand()
     DealerHandSum=DealerHandSum+DealerHandF[-1]
-    term.innerHTML += "Dealer has" + DealerHandF + "<br>"
-
+    term.innerHTML += f"Dealer has {DealerHandF}<br>"
 
 while AINumber<TotalAINumber:
     if AINumber%1000==0 and AINumber!=0:
-        term.innerHTML += "AIs played:" + AINumber + "<br>"
+        term.innerHTML += f"AIs played: {AINumber}<br>"
     AIMoney=StartingMoney
     HandNumber=0
     AmountBet=0
     SplitCheck=0
     SplitCheck1=0
-    term.innerHTML += "AI begins with $" + AIMoney + "<br>"
+    term.innerHTML += f"AI begins with ${AIMoney}<br>"
     while HandNumber<HandsPlayed:
         TurnOver=0
         FirstHandCheck=0
@@ -183,12 +182,12 @@ while AINumber<TotalAINumber:
             if DealerHand[1]>10:
                 DealerHand[1]=10
         if AINumber!=TotalAINumber-1:
-            term.innerHTML += "Dealer's showing card:" + DealerHand[1] + "<br>"
+            term.innerHTML += f"Dealer's showing card: {DealerHand[1]}<br>"
         AIHand.append(random.randint(1, 13))
         if AIHand[1]>10:
             AIHand[1]=10
         if SplitCheck>0:
-            term.innerHTML += "AI previously split with" + SplitCheck + "<br>"
+            term.innerHTML += f"AI previously split with {SplitCheck}<br>"
             AIHand[0]=SplitCheck
             SplitCheck=0
         AIHand.sort()
@@ -200,19 +199,18 @@ while AINumber<TotalAINumber:
                 if AIHand[0]==1 and AIHand[1]>9:
                     Win=2
                     AIMoney=AIMoney+AmountBet
-                    term.innerHTML += "AI and Dealer both have BlackJack" + "<br>"
-                    term.innerHTML += "Tie, AI now has $" + str(round(AIMoney, 2)) + "<br>"
-
+                    term.innerHTML += f"AI and Dealer both have BlackJack<br>"
+                    term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
                 else:
-                    term.innerHTML += "Dealer has BlackJack"+ "<br>"
-                    term.innerHTML += "Loss, AI now has $" + str(round(AIMoney, 2)) + "<br>"
+                    term.innerHTML += f"Dealer has BlackJack<br>"
+                    term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
                 Bust=1
                 FirstHandCheck=1
                 TurnOver=1
         if AIHand[0]==1 and AIHand[1]>9 and Bust==0:
             Blackjack()
         if AINumber!=TotalAINumber-1:
-            term.innerHTML += "AI's original cards:" + AIHand + "<br>"
+            term.innerHTML += f"AI's original cards: {AIHand}<br>"
         DealerHand[0]=DealerFirstCard[0]
         DealerHand[1]=DealerFirstCard[1]
         if TurnOver==0 and BettingClosed==0:
@@ -324,8 +322,8 @@ while AINumber<TotalAINumber:
                     elif AIHandSum<22:
                         Stand()
                 if AIHandSum>21:
-                    term.innerHTML += "AI Busted with" + AIHandSum + "<br>"
-                    term.innerHTML += "Loss, AI now has $" + str(round(AIMoney, 2)) + "<br>"
+                    term.innerHTML += f"AI Busted with {AIHandSum}<br>"
+                    term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
                     Bust=1
                     TurnOver=1
         if Bust==0 and BettingClosed==0:
@@ -333,7 +331,7 @@ while AINumber<TotalAINumber:
                 DealerHandF.append(DealerHand[1])
                 DealerHandF[0]=DealerHand[0]
                 DealerHandSum=DealerHandF[0]+DealerHandF[1]
-                term.innerHTML += "Dealer has" + DealerHandF + "<br>"
+                term.innerHTML += f"Dealer has {DealerHandF}<br>"
                 while DealerTurnOver==0:
                     DealerHandF.sort()
                     if DealerHandF[0]==1:
@@ -349,48 +347,48 @@ while AINumber<TotalAINumber:
                     else:
                         DealerTurnOver=1
             else:
-                term.innerHTML +="The AI split during the previous hand so it will play against the same dealer." + "<br>"
+                term.innerHTML += f"The AI split during the previous hand so it will play against the same dealer.<br>"
             AIHand.sort()
-            term.innerHTML += "Final AI hand:" + AIHand + "<br>"
-            term.innerHTML += "Final Dealer hand:" + DealerHandF + "<br>"
+            term.innerHTML += f"Final AI hand: {AIHand}<br>"
+            term.innerHTML += f"Final Dealer hand: {DealerHandF}<br>"
             if AIHand[0]==1:
                 if AIHandSum+10<22:
                     AIHandSum=AIHandSum+10
             if DealerHandSum>21:
                 AIMoney=AIMoney+2*AmountBet
                 Win=1
-                term.innerHTML += "Win, AI now has $" + str(round(AIMoney, 2))+ "<br>"
+                term.innerHTML += f"Win, AI now has ${round(AIMoney, 2)}<br>"
             elif AIHandSum>DealerHandSum:
                 AIMoney=AIMoney+2*AmountBet
                 Win=1
-                term.innerHTML += "Win, AI now has $" + str(round(AIMoney, 2)) + "<br>"
+                term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
             elif AIHandSum==DealerHandSum:
                 Win=2
                 AIMoney=AIMoney+AmountBet
-                term.innerHTML += "Tie, AI now has $" + str(round(AIMoney, 2)) + "<br>"
+                term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
             else:
-                term.innerHTML += "Loss, AI now has $" + str(round(AIMoney, 2)) + "<br>"
+                term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
         term.innerHTML += "<br>" + "<br>"
         SplitCheck1=0
         if SplitCheck>0:
             SplitCheck1=1
         HandNumber=HandNumber+1
     if AINumber!=TotalAINumber-1:
-        term.innerHTML += "Moving on to a new AI"+ "<br>"
+        term.innerHTML += f"Moving on to a new AI<br>"
     term.innerHTML += "<br>" + "<br>"
     TotalAIMoney.append(AIMoney)
     AINumber=AINumber+1
 TotalAIMoney.sort()
-term.innerHTML += "Total AIs trained:" + TotalAINumber + "<br>"
+term.innerHTML += f"Total AIs trained: {TotalAINumber}<br>"
 for z in range(0, len(TotalAIMoney), 1):
     AverageAIMoney=AverageAIMoney+TotalAIMoney[z]
     if TotalAIMoney[z]>1000 and Above1000Checker==0:
-        term.innerHTML += "Percentage of AIs Above" + EndingMoney + ":" + 100-(100*(z-1)/TotalAINumber) + "<br>"
+        term.innerHTML += f"Percentage of AIs Above {EndingMoney}: {100-(100*(z-1)/TotalAINumber)}<br>"
         Above1000Checker=1
 AverageAIMoney=AverageAIMoney/TotalAINumber
-term.innerHTML += "Mean: $" + AverageAIMoney + "<br>"
+term.innerHTML += f"Mean: ${AverageAIMoney}<br>"
 TotalAIMoney.sort()
-term.innerHTML += "Median: $" + TotalAIMoney[TotalAINumber//2] + "<br>"
+term.innerHTML += f"Median: ${TotalAIMoney[TotalAINumber//2]}<br>"
 plt.hist(TotalAIMoney, 100)
 plt.title("Amount of Money Each AI Ends With")
 plt.xlabel("Final Amount of Money.")
