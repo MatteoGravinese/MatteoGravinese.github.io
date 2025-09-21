@@ -66,7 +66,7 @@ def run_simulation(*args, **kwargs):
   
   def BettingRules():
       nonlocal AIMoney, RiskFactor, AmountBet, HandsPlayed, HandNumber, TurnOver, BettingClosed, Win
-      if 10 &lt; AIMoney &lt; EndingMoney:
+      if 10 < AIMoney < EndingMoney:
           if Win==1 or HandNumber==0:
               AmountBet=AIMoney/(2**RiskFactor)
           elif Win==0 and AIMoney &gt;= AmountBet*2:
