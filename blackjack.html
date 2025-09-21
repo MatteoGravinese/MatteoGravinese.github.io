@@ -32,8 +32,8 @@ def run_simulation(*args, **kwargs):
   from js import document
   term = document.querySelector("#output")
   term.innerHTML = ""
-  import matplotlib.pyplot as plt
-  import random
+  plt = importlib.import_module("matplotlib.pyplot")
+  random = importlib.import_module("random")
   TotalAIMoney=[]
   TotalAINumber=1
   HandsPlayed=1
