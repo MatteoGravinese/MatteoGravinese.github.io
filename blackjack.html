@@ -28,7 +28,7 @@
       { "packages": ["matplotlib"] }
     </py-config>
     <py-script>
-def run_simulation(event=None):
+def run_simulation(*args, **kwargs):
   term = document.querySelector("#output")
   term.innerHTML = ""
   import random
