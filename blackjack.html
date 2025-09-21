@@ -107,6 +107,7 @@ async def run_simulation(*args, **kwargs):
           BettingClosed=1
           term.innerHTML += f"AI ends with ${round(AIMoney, 2)}<br>"
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
       AIMoney=AIMoney-AmountBet
 
 
@@ -126,6 +127,7 @@ async def run_simulation(*args, **kwargs):
       AIHand[1]=random.randint(1, 13)
       term.innerHTML += f"AI splits and now has {AIHand}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       if AIHand[-1] &gt; 10:
           await JQKAIHand()
       if AIHand[0]==1 and AIHand[1] &gt; 9:
@@ -141,6 +143,7 @@ async def run_simulation(*args, **kwargs):
       AIHandSum=AIHandSum+AIHand[-1]
       term.innerHTML += f"AI hits and now has {AIHand}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
 
 
   async def DoubleDown():
@@ -152,6 +155,7 @@ async def run_simulation(*args, **kwargs):
           await Hit()
           term.innerHTML += f"AI doubles down and now has {AIHand}<br>"
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
           DoubleDownCheck=0
           TurnOver=1
       else:
@@ -168,8 +172,10 @@ async def run_simulation(*args, **kwargs):
       FirstHandCheck=1
       term.innerHTML += f"BlackJack! {AIHand}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       term.innerHTML += f"AI won and now has ${round(AIMoney, 2)}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       BettingClosed=1
 
 
@@ -178,6 +184,7 @@ async def run_simulation(*args, **kwargs):
       TurnOver=1
       term.innerHTML += f"AI stands with {AIHand}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
 
 
   async def DealerHit():
@@ -188,11 +195,13 @@ async def run_simulation(*args, **kwargs):
       DealerHandSum=DealerHandSum+DealerHandF[-1]
       term.innerHTML += f"Dealer has {DealerHandF}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       
   while AINumber &lt; TotalAINumber:
       if AINumber%1000==0 and AINumber!=0:
           term.innerHTML += f"AIs played: {AINumber}<br>"
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
       AIMoney=StartingMoney
       HandNumber=0
       AmountBet=0
@@ -200,6 +209,7 @@ async def run_simulation(*args, **kwargs):
       SplitCheck1=0
       term.innerHTML += f"AI begins with ${AIMoney}<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       while HandNumber &lt; HandsPlayed:
           TurnOver=0
           FirstHandCheck=0
@@ -225,12 +235,14 @@ async def run_simulation(*args, **kwargs):
           if AINumber!=TotalAINumber-1:
               term.innerHTML += f"Dealer's showing card: {DealerHand[1]}<br>"
               term.scrollTop = term.scrollHeight
+              await asyncio.sleep(0)
           AIHand.append(random.randint(1, 13))
           if AIHand[1] &gt; 10:
               AIHand[1]=10
           if SplitCheck &gt; 0:
               term.innerHTML += f"AI previously split with {SplitCheck}<br>"
               term.scrollTop = term.scrollHeight
+              await asyncio.sleep(0)
               AIHand[0]=SplitCheck
               SplitCheck=0
           AIHand.sort()
@@ -244,13 +256,17 @@ async def run_simulation(*args, **kwargs):
                       AIMoney=AIMoney+AmountBet
                       term.innerHTML += f"AI and Dealer both have BlackJack<br>"
                       term.scrollTop = term.scrollHeight
+                      await asyncio.sleep(0)
                       term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
                       term.scrollTop = term.scrollHeight
+                      await asyncio.sleep(0)
                   else:
                       term.innerHTML += f"Dealer has BlackJack<br>"
                       term.scrollTop = term.scrollHeight
+                      await asyncio.sleep(0)
                       term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
                       term.scrollTop = term.scrollHeight
+                      await asyncio.sleep(0)
                   Bust=1
                   FirstHandCheck=1
                   TurnOver=1
@@ -259,6 +275,7 @@ async def run_simulation(*args, **kwargs):
           if AINumber!=TotalAINumber-1:
               term.innerHTML += f"AI's original cards: {AIHand}<br>"
               term.scrollTop = term.scrollHeight
+              await asyncio.sleep(0)
           DealerHand[0]=DealerFirstCard[0]
           DealerHand[1]=DealerFirstCard[1]
           if TurnOver==0 and BettingClosed==0:
@@ -372,8 +389,10 @@ async def run_simulation(*args, **kwargs):
                   if AIHandSum &gt; 21:
                       term.innerHTML += f"AI Busted with {AIHandSum}<br>"
                       term.scrollTop = term.scrollHeight
+                      await asyncio.sleep(0)
                       term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
                       term.scrollTop = term.scrollHeight
+                      await asyncio.sleep(0)
                       Bust=1
                       TurnOver=1
           if Bust==0 and BettingClosed==0:
@@ -383,6 +402,7 @@ async def run_simulation(*args, **kwargs):
                   DealerHandSum=DealerHandF[0]+DealerHandF[1]
                   term.innerHTML += f"Dealer has {DealerHandF}<br>"
                   term.scrollTop = term.scrollHeight
+                  await asyncio.sleep(0)
                   while DealerTurnOver==0:
                       DealerHandF.sort()
                       if DealerHandF[0]==1:
@@ -400,11 +420,14 @@ async def run_simulation(*args, **kwargs):
               else:
                   term.innerHTML += f"The AI split during the previous hand so it will play against the same dealer.<br>"
                   term.scrollTop = term.scrollHeight
+                  await asyncio.sleep(0)
               AIHand.sort()
               term.innerHTML += f"Final AI hand: {AIHand}<br>"
               term.scrollTop = term.scrollHeight
+              await asyncio.sleep(0)
               term.innerHTML += f"Final Dealer hand: {DealerHandF}<br>"
               term.scrollTop = term.scrollHeight
+              await asyncio.sleep(0)
               if AIHand[0]==1:
                   if AIHandSum+10 &lt; 22:
                       AIHandSum=AIHandSum+10
@@ -413,22 +436,28 @@ async def run_simulation(*args, **kwargs):
                   Win=1
                   term.innerHTML += f"Win, AI now has ${round(AIMoney, 2)}<br>"
                   term.scrollTop = term.scrollHeight
+                  await asyncio.sleep(0)
               elif AIHandSum &gt; DealerHandSum:
                   AIMoney=AIMoney+2*AmountBet
                   Win=1
                   term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
                   term.scrollTop = term.scrollHeight
+                  await asyncio.sleep(0)
               elif AIHandSum==DealerHandSum:
                   Win=2
                   AIMoney=AIMoney+AmountBet
                   term.innerHTML += f"Tie, AI now has ${round(AIMoney, 2)}<br>"
                   term.scrollTop = term.scrollHeight
+                  await asyncio.sleep(0)
               else:
                   term.innerHTML += f"Loss, AI now has ${round(AIMoney, 2)}<br>"
                   term.scrollTop = term.scrollHeight
+                  await asyncio.sleep(0)
           term.innerHTML += "<br>" + "<br>"
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
           SplitCheck1=0
           if SplitCheck &gt; 0:
               SplitCheck1=1
@@ -436,31 +465,38 @@ async def run_simulation(*args, **kwargs):
       if AINumber!=TotalAINumber-1:
           term.innerHTML += f"Moving on to a new AI<br>"
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
       term.innerHTML += "<br>" + "<br>"
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       term.scrollTop = term.scrollHeight
+      await asyncio.sleep(0)
       TotalAIMoney.append(AIMoney)
       AINumber=AINumber+1
   TotalAIMoney.sort()
   term.innerHTML += f"Total AIs trained: {TotalAINumber}<br>"
   term.scrollTop = term.scrollHeight
+  await asyncio.sleep(0)
   for z in range(0, len(TotalAIMoney), 1):
       AverageAIMoney=AverageAIMoney+TotalAIMoney[z]
       if TotalAIMoney[z] &gt; 1000 and Above1000Checker==0:
           term.innerHTML += f"Percentage of AIs Above {EndingMoney}: {100-(100*(z-1)/TotalAINumber)}<br>"
           term.scrollTop = term.scrollHeight
+          await asyncio.sleep(0)
           Above1000Checker=1
   AverageAIMoney=AverageAIMoney/TotalAINumber
   term.innerHTML += f"Mean: ${AverageAIMoney}<br>"
   term.scrollTop = term.scrollHeight
+  await asyncio.sleep(0)
   TotalAIMoney.sort()
   term.innerHTML += f"Median: ${TotalAIMoney[TotalAINumber//2]}<br>"
   term.scrollTop = term.scrollHeight
+  await asyncio.sleep(0)
   plt.hist(TotalAIMoney, 100)
   plt.title("Amount of Money Each AI Ends With")
   plt.xlabel("Final Amount of Money.")
   plt.ylabel("Frequency.")
-  plt.show()
+  plt.show("plot")
     </py-script>
   </body>
 </html>
