@@ -25,21 +25,16 @@
     <h1>Live Python Output Window</h1>
     <button py-click="run_script">Start Script</button>
     <py-terminal id="term"></py-terminal>
-    <py-config>
-      {
-        "terminal": "#term"
-      }
-    </py-config>
     <py-script>
     from js import document
     from time import sleep
+    from pyscript import Element
     def run_script(event=None):
-      term = document.querySelector("#term")
-      term.innerHTML = ""
+      Element("term").element.innerHTML = ""
       for i in range(1, 6):
-        print(f"Step {i} running...")
+        Element("term").write(f"Step {i} running...\n")
         sleep(1)
-      print("✅ Done!")
+      Element("term").write("✅ Done!\n")
     </py-script>
   </body>
 </html>
