@@ -27,9 +27,11 @@
     <button py-click="run_script">Start Script</button>
     <div id="term"></div>
     <py-script>
-import random
-import matplotlib.pyplot as plt
-import time
+    <py-config>
+    {
+      "packages": ["matplotlib", "random", "time"]
+    }
+    </py-config>
 TotalAIMoney=[]
 TotalAINumber=100
 HandsPlayed=100
@@ -389,11 +391,11 @@ AverageAIMoney=AverageAIMoney/TotalAINumber
 term.innerHTML += f"Mean: ${AverageAIMoney}<br>"
 TotalAIMoney.sort()
 term.innerHTML += f"Median: ${TotalAIMoney[TotalAINumber//2]}<br>"
-plt.hist(TotalAIMoney, 100)
-plt.title("Amount of Money Each AI Ends With")
-plt.xlabel("Final Amount of Money.")
-plt.ylabel("Frequency.")
-plt.show()
+matplotlib.hist(TotalAIMoney, 100)
+matplotlib.title("Amount of Money Each AI Ends With")
+matplotlib.xlabel("Final Amount of Money.")
+matplotlib.ylabel("Frequency.")
+matplotlib.show()
     </py-script>
   </body>
 </html>
