@@ -1,20 +1,21 @@
-<head>
-  <meta charset="UTF-8">
-  <title>Live Python Output</title>
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-</head>
-<body>
-  <h1>Live Python Output Window</h1>
-  <button py-click="run_script">Start Script</button>
-  <py-terminal></py-terminal>
-  <py-script>
-    import time
-    def run_script(event=None):
-      for i in range(1, 6):
-          print(f"Step {i} running...")
-          time.sleep(1)
-      print("✅ Done!")
-  </py-script>
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Live Python Output</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+  <body>
+    <h1>Live Python Output Window</h1>
+    <button py-click="run_script">Start Script</button>
+    <py-terminal></py-terminal>
+    <py-script>
+      import time
+      def run_script(event=None):
+        for i in range(1, 6):
+            print(f"Step {i} running...")
+            time.sleep(1)
+        print("✅ Done!")
+    </py-script>
+  </body>
 </html>
