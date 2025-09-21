@@ -22,7 +22,7 @@
   </head>
   <body>
     <h1>AI Blackjack Simulation</h1>
-    <button py-click="run_simulation()">Start Simulation</button>
+    <button py-click="run_simulation">Start Simulation</button>
     <div id="output"></div>
     <py-config>
       { "packages": ["matplotlib"] }
@@ -31,6 +31,7 @@
 def run_simulation(*args, **kwargs):
   term = document.querySelector("#output")
   term.innerHTML = ""
+  import matplotlib.pyplot as plt
   import random
   TotalAIMoney=[]
   TotalAINumber=1
@@ -391,11 +392,11 @@ def run_simulation(*args, **kwargs):
   term.innerHTML += f"Mean: ${AverageAIMoney}<br>"
   TotalAIMoney.sort()
   term.innerHTML += f"Median: ${TotalAIMoney[TotalAINumber//2]}<br>"
-  matplotlib.hist(TotalAIMoney, 100)
-  matplotlib.title("Amount of Money Each AI Ends With")
-  matplotlib.xlabel("Final Amount of Money.")
-  matplotlib.ylabel("Frequency.")
-  matplotlib.show()
+  plt.hist(TotalAIMoney, 100)
+  plt.title("Amount of Money Each AI Ends With")
+  plt.xlabel("Final Amount of Money.")
+  plt.ylabel("Frequency.")
+  plt.show()
     </py-script>
   </body>
 </html>
