@@ -1,37 +1,33 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Live Python Output</title>
+    <title>AI Blackjack Simulation</title>
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.5.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2024.5.1/core.js"></script>
     <style>
-      #term {
-        display: block; 
+      #output {
+        display: block;
         background-color: #1e1e1e;
         color: #ffffff;
         font-family: monospace;
-        width: 500px;
-        height: 250px;
+        width: 600px;
+        height: 300px;
         padding: 10px;
         border-radius: 6px;
         overflow-y: auto;
-        overflow-x: auto;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        margin-top: 15px;
         white-space: pre-wrap;
+        margin-top: 15px;
       }
     </style>
   </head>
   <body>
-    <h1>Live Python Output Window</h1>
-    <button py-click="run_script">Start Script</button>
-    <div id="term"></div>
-    <py-script>
+    <h1>AI Blackjack Simulation</h1>
+    <button py-click="run_simulation()">Start Simulation</button>
+    <div id="output"></div>
     <py-config>
-    {
-      "packages": ["matplotlib", "random", "time"]
-    }
+      { "packages": ["matplotlib", "random"] }
     </py-config>
+    <py-script>
 TotalAIMoney=[]
 TotalAINumber=100
 HandsPlayed=100
