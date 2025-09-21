@@ -33,7 +33,10 @@
     </py-config>
     <py-script>
 def run_simulation(*args, **kwargs):
-  from js import document
+  from js import document, setTimeout
+  def scroll_to_bottom():
+    term = document.querySelector("#output")
+    term.scrollTop = term.scrollHeight
   TotalAINumber = int(document.querySelector("#total-ai").value)
   HandsPlayed = int(document.querySelector("#hands-played").value)
   term = document.querySelector("#output")
@@ -78,6 +81,7 @@ def run_simulation(*args, **kwargs):
           elif Win==0:
               AmountBet=AIMoney
           term.innerHTML += f"Amount bet: ${round(AmountBet, 2)}<br>"
+          setTimeout(scroll_to_bottom, 0)
           term.scrollTop = term.scrollHeight
       else:
           AmountBet=0
