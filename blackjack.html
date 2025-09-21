@@ -25,12 +25,13 @@
     <button py-click="run_simulation()">Start Simulation</button>
     <div id="output"></div>
     <py-config>
-      { "packages": ["matplotlib", "random"] }
+      { "packages": ["matplotlib"] }
     </py-config>
     <py-script>
 def run_simulation(event=None):
   term = document.querySelector("#output")
   term.innerHTML = ""
+  import random
   TotalAIMoney=[]
   TotalAINumber=1
   HandsPlayed=1
