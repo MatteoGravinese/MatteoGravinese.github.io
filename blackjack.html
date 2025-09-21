@@ -492,11 +492,18 @@ async def run_simulation(*args, **kwargs):
   term.innerHTML += f"Median: ${TotalAIMoney[TotalAINumber//2]}<br>"
   term.scrollTop = term.scrollHeight
   await asyncio.sleep(0)
-  plt.hist(TotalAIMoney, 100)
-  plt.title("Amount of Money Each AI Ends With")
-  plt.xlabel("Final Amount of Money.")
-  plt.ylabel("Frequency.")
-  plt.show("plot")
+  fig, ax = plt.subplots()
+  ax.hist(TotalAIMoney, 100)
+  ax.set_title("Amount of Money Each AI Ends With")
+  ax.set_xlabel("Final Amount of Money")
+  ax.set_ylabel("Frequency")
+  buf = io.BytesIO()
+  fig.savefig(buf, format="png")
+  buf.seek(0)
+  img_base64 = base64.b64encode(buf.read()).decode("utf-8")
+  plot_div = document.querySelector("#plot")
+  plot_div.innerHTML = f'<img src="data:image/png;base64,{img_base64}" style="width:100%; height:100%; object-fit:contain;" />'
+  plt.close(fig)
     </py-script>
   </body>
 </html>
