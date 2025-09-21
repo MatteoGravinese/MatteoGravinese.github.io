@@ -18,23 +18,24 @@
         overflow-x: auto;
         box-shadow: 0 0 10px rgba(0,0,0,0.5);
         margin-top: 15px;
+        white-space: pre-wrap;
       }
     </style>
   </head>
   <body>
     <h1>Live Python Output Window</h1>
     <button py-click="run_script">Start Script</button>
-    <py-terminal id="term"></py-terminal>
+    <div id="term"></div>
     <py-script>
     from js import document
     from time import sleep
-    from pyscript import Element
     def run_script(event=None):
-      Element("term").element.innerHTML = ""
+      term = document.getElementById("term")
+      term.innerHTML = ""
       for i in range(1, 6):
-        Element("term").write(f"Step {i} running...\n")
+        term.innerHTML += f"Step {i} running...<br>"
         sleep(1)
-      Element("term").write("✅ Done!\n")
+      term.innerHTML += "✅ Done!<br>"
     </py-script>
   </body>
 </html>
