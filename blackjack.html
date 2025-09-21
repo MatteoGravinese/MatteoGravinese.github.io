@@ -111,9 +111,9 @@ async def run_simulation(*args, **kwargs):
       term.innerHTML += f"AI splits and now has {AIHand}<br>"
       term.scrollTop = term.scrollHeight
       if AIHand[-1] &gt; 10:
-          JQKAIHand()
+          await JQKAIHand()
       if AIHand[0]==1 and AIHand[1] &gt; 9:
-          Blackjack()
+          await Blackjack()
       FirstHandCheck=0
 
 
@@ -121,7 +121,7 @@ async def run_simulation(*args, **kwargs):
       nonlocal AIHand, AIHandSum, DoubleDownCheck, AINumber
       AIHand.append(random.randint(1, 13))
       if AIHand[-1] &gt; 10:
-          JQKAIHand()
+          await JQKAIHand()
       AIHandSum=AIHandSum+AIHand[-1]
       term.innerHTML += f"AI hits and now has {AIHand}<br>"
       term.scrollTop = term.scrollHeight
@@ -133,13 +133,13 @@ async def run_simulation(*args, **kwargs):
           DoubleDownCheck=1
           AIMoney=AIMoney-AmountBet
           AmountBet=AmountBet*2
-          Hit()
+          await Hit()
           term.innerHTML += f"AI doubles down and now has {AIHand}<br>"
           term.scrollTop = term.scrollHeight
           DoubleDownCheck=0
           TurnOver=1
       else:
-          Hit()
+          await Hit()
       FirstHandCheck=1
 
 
@@ -168,7 +168,7 @@ async def run_simulation(*args, **kwargs):
       nonlocal DealerHandF, DealerHandSum, AINumber
       DealerHandF.append(random.randint(1, 13))
       if DealerHandF[-1] &gt; 10:
-          JQKDealerHand()
+          await JQKDealerHand()
       DealerHandSum=DealerHandSum+DealerHandF[-1]
       term.innerHTML += f"Dealer has {DealerHandF}<br>"
       term.scrollTop = term.scrollHeight
@@ -239,7 +239,7 @@ async def run_simulation(*args, **kwargs):
                   FirstHandCheck=1
                   TurnOver=1
           if AIHand[0]==1 and AIHand[1] &gt; 9 and Bust==0:
-              Blackjack()
+              await Blackjack()
           if AINumber!=TotalAINumber-1:
               term.innerHTML += f"AI's original cards: {AIHand}<br>"
               term.scrollTop = term.scrollHeight
@@ -251,108 +251,108 @@ async def run_simulation(*args, **kwargs):
                   if AIHand[0]==AIHand[1]:
                       FirstHandCheck=1
                       if AIHand[0]==1 or AIHand[0]==8:
-                          Split()
+                          await Split()
                       elif AIHand[0]==2 or AIHand [0]==3:
                           if 3 &lt; DealerHand[1] &lt; 8:
-                              Split()
+                              await Split()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[0]==4:
-                          Hit()
+                          await Hit()
                       elif AIHand[0]==5:
                           if DealerHand[1] &lt; 10 and DealerHand[1]!=1:
-                              DoubleDown()
+                              await DoubleDown()
                           else:
-                              Hit()
+                              await Hit()
                           if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
-                              Split()
+                              await Split()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[0]==7:
                           if DealerHand[1] &lt; 8 and DealerHand[1]!=1:
-                              Split()
+                              await Split()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[0]==9:
                           if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
-                              Split()
+                              await Split()
                           elif DealerHand[1]==8 or DealerHand[1]==9:
-                              Split()
+                              await Split()
                           else:
-                              Hit()
+                              await Hit()
                       else:
-                          Stand()
+                          await Stand()
                   elif AIHand[0]==1 and FirstHandCheck==0:
                       FirstHandCheck=1
                       if AIHand[1] &lt; 7:
                           if 3 &lt; DealerHand[1] &lt; 7:
-                              DoubleDown()
+                              await DoubleDown()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[1]==7:
                           if DealerHand[1]==2 or DealerHand[1]==7 or DealerHand[1]==8:
-                              Stand()
+                              await Stand()
                           elif 2 &lt; DealerHand[1] &lt; 7:
-                              DoubleDown()
+                              await DoubleDown()
                           else:
-                              Hit()
+                              await Hit()
                       else:
-                          Stand()    
+                          await Stand()    
                   elif FirstHandCheck==0:
                       FirstHandCheck=1
                       if AIHand[0]+AIHand[1] &lt; 9:
-                          Hit()
+                          await Hit()
                       elif AIHand[0]+AIHand[1]==9:
                           if 2 &lt; DealerHand[1] &lt; 7:
-                              DoubleDown()
+                              await DoubleDown()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[0]+AIHand[1]==10:
                           if DealerHand[1] &lt; 10 and DealerHand[1]!=1:
-                              DoubleDown()
+                              await DoubleDown()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[0]+AIHand[1]==11:
-                          DoubleDown()
+                          await DoubleDown()
                       elif AIHand[0]+AIHand[1]==12:
                           if 3 &lt; DealerHand[1] &lt; 7:
-                              Stand()
+                              await Stand()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHand[0]+AIHand[1] &lt; 17:
                           if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
-                              Stand()
+                              await Stand()
                           else:
-                              Hit()
+                              await Hit()
                       else:
-                          Stand()
+                          await Stand()
               while TurnOver==0:
                   AIHand.sort()
                   if AIHand[0]==1:
                       if AIHandSum &lt; 8:
-                          Hit()
+                          await Hit()
                       elif AIHandSum==8:
                           if DealerHand[1]==2 or DealerHand[1]==7 or DealerHand[1]==8:
-                              Stand()
+                              await Stand()
                           else:
-                              Hit()
+                              await Hit()
                       else:
-                          Stand()    
+                          await Stand()    
                   else:
                       if AIHandSum &lt; 12:
-                          Hit()
+                          await Hit()
                       elif AIHandSum==12:
                           if 3 &lt; DealerHand[1] &lt; 7:
-                              Stand()
+                              await Stand()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHandSum &lt; 17:
                           if DealerHand[1] &lt; 7 and DealerHand[1]!=1:
-                              Stand()
+                              await Stand()
                           else:
-                              Hit()
+                              await Hit()
                       elif AIHandSum &lt; 22:
-                          Stand()
+                          await Stand()
                   if AIHandSum &gt; 21:
                       term.innerHTML += f"AI Busted with {AIHandSum}<br>"
                       term.scrollTop = term.scrollHeight
@@ -374,11 +374,11 @@ async def run_simulation(*args, **kwargs):
                               DealerHandSum=DealerHandSum+10
                               DealerTurnOver=1
                           elif DealerHandSum &lt; 17:
-                              DealerHit()
+                              await DealerHit()
                           else:
                               DealerTurnOver=1
                       elif DealerHandSum &lt; 17:
-                          DealerHit()
+                          await DealerHit()
                       else:
                           DealerTurnOver=1
               else:
