@@ -233,7 +233,7 @@ async def run_simulation(*args, **kwargs):
               DealerHand.append(random.randint(1, 13))
               if DealerHand[1] &gt; 10:
                   DealerHand[1]=10
-          if AINumber!=TotalAINumber-1:
+          if AINumber!=TotalAINumber:
               term.innerHTML += f"Dealer's showing card: {DealerHand[1]}<br>"
               term.scrollTop = term.scrollHeight
               await asyncio.sleep(0)
@@ -273,7 +273,7 @@ async def run_simulation(*args, **kwargs):
                   TurnOver=1
           if AIHand[0]==1 and AIHand[1] &gt; 9 and Bust==0:
               await Blackjack()
-          if AINumber!=TotalAINumber-1:
+          if AINumber!=TotalAINumber:
               term.innerHTML += f"AI's original cards: {AIHand}<br>"
               term.scrollTop = term.scrollHeight
               await asyncio.sleep(0)
